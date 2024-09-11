@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { cn } from "../lib/utils";
-
 import { User } from "../api/types";
 
 import {
@@ -11,25 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Input } from "./ui/input";
-import { Filter } from "lucide-react";
-
-const SearchInput = ({
-  className,
-  style,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement>) => {
-  return (
-    <div className={cn("relative w-full", className)} style={style}>
-      <Filter className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2" />
-      <Input
-        type="search"
-        className="text-foreground pl-8 box-border border-none bg-transparent focus-visible:ring-offset-1 ring-offset-transparent focus-visible:ring-1 focus-visible:ring-primary/50"
-        {...props}
-      />
-    </div>
-  );
-};
+import SearchInput from "./search-input";
 
 type Filters = {
   name: string;
@@ -44,6 +24,16 @@ const initialFilters = {
   email: "",
   phone: "",
 };
+
+const filterUsers = (users: User[], filters: Filters) =>
+  users.filter((user) => {
+    return (
+      user.name.toLowerCase().includes(filters.name.toLowerCase()) &&
+      user.username.toLowerCase().includes(filters.username.toLowerCase()) &&
+      user.email.toLowerCase().includes(filters.email.toLowerCase()) &&
+      user.phone.toLowerCase().includes(filters.phone.toLowerCase())
+    );
+  });
 
 export default function UsersTable({ users }: { users: User[] }) {
   const [filters, setFilters] = useState<Filters>(initialFilters);
@@ -94,7 +84,7 @@ export default function UsersTable({ users }: { users: User[] }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {users.map((user) => (
+        {filterUsers(users, filters).map((user) => (
           <TableRow key={user.id}>
             <TableCell className="font-medium">{user.name}</TableCell>
             <TableCell>{user.username}</TableCell>
