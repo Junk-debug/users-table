@@ -13,8 +13,8 @@ function App() {
   return (
     <Layout>
       <Card className="h-[95%] overflow-y-auto flex flex-col">
-        <CardHeader className="text-3xl font-bold flex flex-row justify-between">
-          Users list
+        <CardHeader className="text-3xl font-bold flex flex-row gap-2 justify-between items-end">
+          Users table
           <ClearFiltersButton />
         </CardHeader>
         <CardContent className="flex-grow">
