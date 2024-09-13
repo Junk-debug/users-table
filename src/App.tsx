@@ -6,6 +6,7 @@ import { useGetUsersQuery } from "./api/api";
 import Layout from "./components/layout";
 import UsersTable from "./components/users-table";
 import ClearFiltersButton from "./components/clear-filters-button";
+import { ThemeToggle } from "./components/theme-toggle";
 
 function App() {
   const { isLoading, data: users } = useGetUsersQuery();
@@ -15,7 +16,10 @@ function App() {
       <Card className="h-[95%] overflow-y-auto flex flex-col">
         <CardHeader className="text-3xl font-bold flex flex-row gap-2 justify-between items-end">
           Users table
-          <ClearFiltersButton />
+          <div className="flex flex-row gap-2">
+            <ThemeToggle />
+            <ClearFiltersButton />
+          </div>
         </CardHeader>
         <CardContent className="flex-grow">
           {isLoading ? (
