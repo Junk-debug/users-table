@@ -36,6 +36,7 @@ export default function UsersTable({ users }: { users: User[] }) {
             <SearchInput
               placeholder="Name"
               value={filters.name}
+              name="name"
               onChange={(e) => handleFilterChange("name", e.target.value)}
               className="min-w-[110px]"
             />
@@ -43,6 +44,7 @@ export default function UsersTable({ users }: { users: User[] }) {
           <TableHead className="w-[200px]">
             <SearchInput
               placeholder="Username"
+              name="username"
               value={filters.username}
               onChange={(e) => handleFilterChange("username", e.target.value)}
               className="min-w-[150px]"
@@ -51,6 +53,7 @@ export default function UsersTable({ users }: { users: User[] }) {
           <TableHead className="w-[220px]">
             <SearchInput
               placeholder="Email"
+              name="email"
               className="min-w-[180px]"
               value={filters.email}
               onChange={(e) => handleFilterChange("email", e.target.value)}
@@ -59,6 +62,7 @@ export default function UsersTable({ users }: { users: User[] }) {
           <TableHead className="w-[230px] text-left">
             <SearchInput
               placeholder="Phone"
+              name="phone"
               className="min-w-[200px]"
               onChange={(e) => handleFilterChange("phone", e.target.value)}
               value={filters.phone}
